@@ -1,12 +1,15 @@
 #ifndef MONTY_H
 #define MONTY_H
-#include <stdio.h>
+
+/*libraries*/
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include <unistd.h>
-#include <stdbool.h>    
 #include <ctype.h>
+
+
+/*structures*/
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -19,9 +22,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -34,11 +37,20 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void f_push(stack_t **stack, unsigned int line_number);
-void f_pall(stack_t **stack, unsigned int line_number);
-instruction_t *find_func(char *opcode);
-#endif // MONTY_H
+/*prototypes*/
+int main(int argc, char *argv[]);
+void exec_instruction(stack_t **stack, char *line, unsigned int line_number);
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t *stack);
+int is_integer(const char *str);
+#endif
